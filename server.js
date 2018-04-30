@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var _ = require('underscore');
+var db = require('./db.js');
 
 var PORT = process.env.PORT || 3000;
 var todos = [];
@@ -30,7 +31,7 @@ app.get('/todos', function(req, res) {
     
     if (queryParams.hasOwnProperty('q') && queryParams.q.length > 0){
         filteredTodos = _.filter(filteredTodos, function(todo) {
-            return todo.description.indexOf(queryParams.q) > -1;
+            return todo.description.toLowerCase().indexOf(queryParams.q.toLowerCase()) > -1;
         });
     }
     
@@ -115,6 +116,9 @@ app.put('/todos/:id', function(req, res){
     res.json(matchedTodo);
 });
 
-app.listen(PORT, function(){
+db.sequelize.sync(function(){
+  app.listen(PORT, function(){
     console.log('Express listening on port ' + PORT + '!');
-})
+  });
+});
+
