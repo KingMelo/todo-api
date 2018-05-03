@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var _ = require('underscore');
 var db = require('./db.js');
 
+var port = process.env.PORT || 8000;
+
 var todos = [];
 var todoNextId = 1;
 
@@ -109,8 +111,8 @@ app.put('/todos/:id', function(req, res){
 });
 
 db.sequelize.sync(function(){
-  app.listen(process.env.PORT || 3000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  app.listen(port, function() {
+    console.log("App is running on port " + port);
   });
 });
 
