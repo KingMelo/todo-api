@@ -110,7 +110,7 @@ app.put('/todos/:id', function(req, res){
     res.json(matchedTodo);
 });
 
-db.sequelize.sync(function(){
+db.sequelize.sync().then(function(){
   app.listen(port, function() {
     console.log("App is running on port " + port);
   });
