@@ -11,7 +11,7 @@
   "license": "ISC",
   "engines": {
       "node": "6.14.1",
-      "npm": "6.0.0."
+      "npm": "6.0.0"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
